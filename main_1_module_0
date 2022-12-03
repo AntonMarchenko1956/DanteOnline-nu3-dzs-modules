@@ -1,0 +1,33 @@
+from array import *
+
+mainList = array('i')
+
+def tst(allElem, thH):
+    go = True
+    while go == True:
+        if allElem in range(int(thH['min']), int(thH['max'])):
+            print('>>>{0}<<<'.format(allElem))
+            listBuilder(allElem)
+            go = False
+        else:
+            print('allElem ...{0}... is out of threshold'.format(allElem))
+            return True
+
+def listBuilder(allElem):
+
+    go = allElem
+    while go > 0:
+        try:
+            entry = int(input('get the next value for array: '))
+            mainList.append(entry)
+            go -= 1
+        except ValueError as entry_error:
+            print(entry_error)
+
+    sortedLst = sorted(mainList)
+    showList(sortedLst)
+
+def showList(lst):
+    maxLen = len(lst)
+    for i in range(0, maxLen):
+        print(f'{i}: {lst[i]}')
