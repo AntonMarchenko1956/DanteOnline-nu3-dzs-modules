@@ -1,0 +1,52 @@
+from array import *
+
+class MemberGenerator:
+    threshold = dict([('min', 1), ('max', 26)])
+    mainList = array('i')
+
+    def __init__(self):
+        self.thMin = MemberGenerator.threshold['min']
+        self.thMax = MemberGenerator.threshold['max']
+
+        print('{0} {1}'.format(self.thMin, self.thMax))
+
+        go = True
+        while go == True:
+            try:
+                entry = int(input('get the num of elements in array: '))
+                print(f'{type(entry)} >>> {entry}')
+                go = self.tst(entry, MemberGenerator.threshold)
+
+            except ValueError as entry_error:
+                print(entry_error)
+
+    def tst(self, allElem, thH):
+        go = True
+        while go == True:
+            if allElem in range(int(thH['min']), int(thH['max'])):
+                print('>>>{0}<<<'.format(allElem))
+                self.listBuilder(allElem)
+                go = False
+            else:
+                print('allElem ...{0}... is out of threshold'.format(allElem))
+                return True
+
+    def listBuilder(self, allElem):
+
+        go = allElem
+        while go > 0:
+            try:
+                entry = int(input('get the next value for array: '))
+                MemberGenerator.mainList.append(entry)
+                go -= 1
+            except ValueError as entry_error:
+                print(entry_error)
+
+            sortedLst = sorted(MemberGenerator.mainList)
+            self.showList(sortedLst)
+            self.genLst = sortedLst
+
+    def showList(self, lst):
+        print('genLst')
+        for i in range(0, len(lst)):
+            print(f'{i}: {lst[i]}')
