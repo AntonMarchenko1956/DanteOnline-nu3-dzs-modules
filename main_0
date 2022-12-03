@@ -1,0 +1,234 @@
+
+"""
+1. Из всех методов списка (list) выбрать 5 тех, которые по вашему мнению
+   используются чаще всего и написать их через запятую с параметрами
+2. Повторить процедуру для словарей (dict),
+                           множеств (set),
+                           строк (str)
+*****
+Задание творческое (???), правильного ответа нет (???), предлагается логически подумать
+какие методы более всего применяются. Методы можно посмотреть по ссылкам:
+. https://pythonworld.ru/tipy-dannyx-v-python/spiski-list-funkcii-i-metody-spiskov.html
+. https://pythonworld.ru/tipy-dannyx-v-python/stroki-funkcii-i-metody-strok.html
+. https://pythonworld.ru/tipy-dannyx-v-python/mnozhestva-set-i-frozenset.html
+. https://pythonworld.ru/tipy-dannyx-v-python/slovari-dict-funkcii-i-metody-slovarej.html
+
+"""
+
+def ex_0():
+
+    s = []
+    print(f's == {s}')
+
+    s.append('s')
+    l = [s, 'p', ['isok'], 2, ([i*5 for i in 'hell' if i != 'e'])]
+    print(f'\nl == {l}')
+
+    s = l[0][0] + l[1] + l[2][0]
+    print(s)
+
+    s = ([i*5 for i in 'hell' if i != 'e'])
+    s = s[0][0] + 'e' + s[1][0] + s[2][0]
+    print(s)
+
+    s = [i*5 for i in 'XXparadizYY' if (i != 'X' and i != 'Y')]
+    print(f'>>> {s} <<<')
+
+    s.pop(3)
+    s.insert(3,'-123-')
+    print(f'... {s} ...')
+
+    s = [i for i in 'XXparadizYY' if (i == 'a'
+                                   or i == 'i'
+                                   or i == 'd'
+                                   or i == 'p'
+                                   or i == 'r'
+                                   or i == 'z')]
+    print(s)
+
+    buff = str()
+    for i in range(0, len(s)):
+        buff = buff + s[i]
+
+    s = buff
+    print(s)
+
+    c0 = [c * 3 for c in s if c != 'i']
+
+    c1 = [c + d for c in c0 if c != 'z' for d in 'hell' if d != 'l']
+    s = c1
+    print(s)
+
+    buff = str()
+    for i in range(0, len(s)):
+        buff = buff + s[i]
+
+    s = buff
+    print(s)
+
+def ex_1():
+
+    d = {1: 'dict', 2: 'dictionary', 'no war': 'stupidity'}
+
+    dd = d['no war']
+    print('---> {} <---'.format(dd))
+
+    d = dict(hell='to left', paradiz='to right')
+    dd = d['paradiz']
+    print(f' {dd} ==>')
+
+    # dict.update([other]) - обновляет словарь, добавляя пары(ключ, значение)
+    # из other. Существующие ключи перезаписываются.Возвращает None(не новый словарь!).
+
+    XXX = ([(125, 'one hundred twenty five')])
+    d.update(XXX)
+    print(f'..... {d[125]} .....')
+
+    dd = d['hell']
+    print(f'<== {dd} ')
+
+    x = ''
+    print(f'{x}==> ', d['paradiz'])
+    x = ''
+    print(f'<=={x} ', d['hell'])
+
+    d = dict.fromkeys(['a', 'b'])
+    x = d['a']
+    print(f'{x}')
+    x = d['b']
+    print(f'{x}')
+
+    d = dict.fromkeys(['a', 'b'], [100, 200])
+    x = d['a'][0]
+    print(f'{x}')
+    x = d['b'][1]
+    print(f'{x}')
+
+    d = {a: a ** 2 for a in range(7)}
+    x = d[1]
+    print(f'^^^^{x}^^^^')
+
+    a = 'Z'
+    d = { i: a + str(i) for i in range(10) }
+    print(f'^^^^{d}^^^^')
+
+    for i in range(10):
+        print(f'{d[i]}', end=' ')
+
+    d.update([('one hundred twenty five', 125)])
+    print(f'\n {d} ')
+
+def ex_2():
+#  Множество в python - "контейнер", содержащий не повторяющиеся элементы в случайном порядке.
+    print('========== ========== ==========')
+    a = set()
+    print(a)
+
+    a = [1,2,3,3,3,4,5]
+    a = set(a)
+    print(a)
+
+    a = set('hello')
+    print(a)
+    a = {'a', 'b', 'c', 'd'}
+    print(a)
+    a = {i ** 2 for i in range(10)}  # генератор множеств
+    print(a)
+
+    a = {}  # а это не множество. Это словарь!
+    print('{0}.....{1}'.format(a, type(a)))
+
+    # пустое множество с помощью литерала создать нельзя.
+    # Множества используются для удаления повторяющихся элементов
+
+    elements = ['012345',
+                '123456',
+                '123456',
+                '345678',
+                '456789',
+                '456789',
+                '678901',
+                '789012',
+                '789012',
+                '901234']
+
+    s0 = set(elements[5])
+    print(s0)
+
+    a = {'a', 'b', 'c', 'd'}
+
+    print(a in a)
+
+    s0 = a
+    s1 = ['a', 'b', 'c', 'd']
+    print('s0 = {0} ... s1 = {1}'.format(s0, s1))
+    print('s0.isdisjoint(s1) == {}'.format(s0.isdisjoint(s1)))
+
+    b = set('aabbccddeeffgghhiijj')
+
+    print('a = {0} ... b = {1}'.format(a, b))
+    print('b.issuperset(a) == {}'.format(b.issuperset(a)))
+    c = set(['c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
+
+    # set.union(other, ...), set.intersection(other, ...)
+    print(' a == {0}\n b == {1}\n c == {2}\n... (b | c & a) == {3}'.format(a, b, c, (b | c & a)))
+
+    a = {'c','a','b','e','d','h','g','e'}
+    b = set(['a','b','c'])
+    c = set('hello')
+
+
+    # set.difference(other, ...)
+    print(' a == {0}\n b == {1}\n c == {2}\n... (a - b - c) == {3}'.format(a, b, c, (a - b - c)))
+
+    # set.symmetric_difference(other);
+    # set ^ other - множество из элементов, встречающихся в одном множестве,
+    # но не встречающихя в других. Объединяются в одно множество
+
+    a = set('abcdefghijklmnopqrs')
+    b = set('abcde123')
+    c = set('cdefddd')
+    d = set('pqrstuxyyyzzz4512')
+    e = a ^ b ^ c ^ d
+    print(' a == {0}\n b == {1}\n c == {2}\n d == {3}\n... (a ^ b ^ c ^ d) == {4}'.format(a, b, c, d, e))
+
+# e ==
+# {'3', 'n', 'k', 'i', 'd', 'h', 'u', 'm', 'l', 'j', 'e', '4', 'o', '5', 'c', 'y', 'x', 'g', 't', 'z'}
+#   b    a    a    a    a    a    d    a    a    a    a    d    a    d    a    d    d    a    d    d
+#                       b                                                 b
+#                       c                                                 c
+#       нет в множестве d                                 нет в множестве d
+
+    e.discard('5')
+    e.discard('3')
+    e.discard('4')
+    e.discard('8')
+    print(' e.discard == {0}'.format(e))
+# ========================================================================
+
+    a = set('qwerty')
+    b = frozenset(a)
+    c = (a == b)
+    print(f'a == b : {0}'.format(c))
+
+    print('type(a - b) == {0}'.format(type(a-b)))
+    print('type(a | b) == {0}'.format(type(a|b)))
+
+    a.add(1)
+    print('\na.add(1) == {0}'.format(a))
+
+    try:
+        print('\nand b.add(1):',end=' ')
+        b.add(1)
+    except AttributeError as atterr:
+        print('oups... {0}'.format(atterr))
+
+
+
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
+    # ex_0()
+    # ex_1()
+    ex_2()
+
+
