@@ -1,27 +1,32 @@
-'''
-В проекте создать новый модуль xseq.py. Задание:
-Пользователь вводит элементы 1-го списка (по очереди как в МОДУЛЬ 1 или вместе как в МОДУЛЬ 2)
-Затем он вводит элементы 2-го списка
-Удалить из первого списка элементы присутствующие во 2-ом и вывести результат на экран
-Пример работы: Введите элементы 1-го списка: 1,2,3,4,5
-Введите элементы 2-го списка: 2,5
-Результат: 1,3,4
-Проверить работу программы на разных списках, чтобы убедиться что она работает верно
-
-'''
-
-from module_0 import *
-from module_1 import *
-
-def main():
-    killer = MemberKiller()
-    generator = MemberGenerator()
-
-    killer.killIt(generator.genLst)
-
-    print('========================================')
-    generator.showList(generator.genLst)
+from array import *
 
 
-if __name__ == '__main__':
-    main()
+class lstTransformer:
+
+    resLst = array('i')
+    mainList = []
+    mainSeparator = None
+
+    def __init__(self, separator, separatorLst, lst):
+        if separator in separatorLst:
+            lstTransformer.mainSeparator = separator
+            lstTransformer.mainList = lst
+            self.lstBuilder()
+
+    def lstBuilder(self):
+        ss = lstTransformer.mainList.split(lstTransformer.mainSeparator)
+        for i in range(0, len(ss)):
+            if (ss[i]).isdigit():
+                print(f'{i} ... {ss[i]} is digit')
+                intSS = int(ss[i])
+                lstTransformer.resLst.append(intSS)
+            else:
+                print(f'{i} ... {ss[i]} is garbage')
+
+    def getResult(self):
+        lstTransformer.resLst = set(lstTransformer.resLst)
+        lstTransformer.resLst = list(lstTransformer.resLst)
+        print('============= the result is: ===============================')
+
+        for i in range(0, len(lstTransformer.resLst)):
+            print(f'{i}: {lstTransformer.resLst[i]}')
